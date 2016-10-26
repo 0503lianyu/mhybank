@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+</head>
+<style>
+    *{margin:0;padding:0;}
+    img{border:none;}
+    #com{width:400px;height:400px;position: relative;float: left;overflow: hidden;margin-left:10px;margin-top:0px;}
+    #com img{width:400px;height:400px;position:absolute;left: 0;top: 0;float: left;}
+    #small{width:100px;height:100px;border:1px solid #fff;position:absolute;left:0;top: 0;background:#ccc;z-index:6;opacity:0.6;}
+    #big{width:400px;height:400px;float: left;background:#ccc;overflow: hidden;position:relative;margin-left:10px;display:inline;}
+    #big img{position:absolute;left:0;top:0;width:1600px;height:1600px;}
+
+</style>
+<script type="text/javascript" src="jquery-1.11.3.js"></script>
+<script type="text/javascript">
+    function Expand(){
+        this.main = document.getElementById('com');
+        this.small = document.getElementById('small');
+        this.expand = document.getElementById('big').children[0];
+        this.x=0;
+        this.y=0;
+        this.ml = parseInt((this.main.currentStyle || window.getComputedStyle(this.main,null)).marginLeft);
+        this.mt = parseInt((this.main.currentStyle || window.getComputedStyle(this.main,null)).marginTop);
+
+        var _self=this;
+        this.resetPosition=function(x,y){
+            _self.expand.style.left=-4*x+"px";
+            _self.expand.style.top=-4*y+"px";
+        }
+        this.main.onmousemove = function(e){
+           var e=e || window.event;
+           //if(e.target==this){
+                _self.x=e.clientX;
+                _self.y=e.clientY;
+
+          // }
+                _self.small.style.left=(_self.x-_self.ml)-self.small.offsetWidth/2+"px";
+                _self.small.style.top=(_self.y-_self.mt)-self.small.offsetHeight/2+"px";
+                _self.resetPosition(parseInt(_self.small.style.left),parseInt(_self.small.style.top));
+
+        } 
+    }
+
+    $(document).ready(function(){
+        var _expand = new Expand();
+        //_expand.
+
+
+
+    });
+
+
+
+
+
+</script>
+<body>
+    <div id="com">
+        <img src="images/img1.jpg" alt=""/>
+        <div id="small"></div>
+    </div>
+
+    <div id="big"><img src="images/img1.jpg" alt=""/></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
